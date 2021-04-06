@@ -59,6 +59,12 @@ public class DogManagementService {
         }
         return dog;
     }
+    public void updateDog() {
+        dogRepository.editInfo();
+    }
+    public void updateDogkind(String newkind) {
+        dogRepository.editKind(newkind);
+    }
 
     public List<Dog> getAllDogs() {
 
