@@ -59,8 +59,8 @@ public class DogManagementService {
         }
         return dog;
     }
-    public void updateDog(String name, String ownerName, String ownerPhoneNumber) {
-        dogRepository.editInfo(name, ownerName, ownerPhoneNumber);
+    public void updateDog(String name, String ownerName, String ownerPhoneNumber, String newName, String newOwnerName, String newOwnerPhoneNumber, String newKind, String newMedicalRecord) {
+        dogRepository.editInfo(name, ownerName, ownerPhoneNumber, newName, newOwnerName, newOwnerPhoneNumber, newKind, newMedicalRecord);
     }
     public void updateDogkind(String name, String ownerName, String ownerPhoneNumber, String newkind) {
         dogRepository.editKind(name, ownerName, ownerPhoneNumber, newkind);
