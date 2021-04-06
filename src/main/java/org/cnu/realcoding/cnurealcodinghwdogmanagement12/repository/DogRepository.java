@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.Iterator;
@@ -48,4 +49,19 @@ public class DogRepository {
     public List<Dog> findAllDogs() {
         return mongoTemplate.findAll(Dog.class);
     }
+
+    public void editInfo() {
+        Update update = new Update();
+        mongoTemplate.updateMulti(new Query(), update, "Dog");
+    }
+
+    public void editKind(String newKind) {
+        Query query = new Query();
+        //업데이트 할 항목 정의
+        Update update = new Update();
+        update.set("kind", newKind);
+
+        mongoTemplate.updateFirst(query, update, "Dog");
+    }
+
 }
