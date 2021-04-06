@@ -20,12 +20,6 @@ public class DogController {
         dogManagementService.insertDog(dog);
     }
 
-    @GetMapping("/dogs")
-    public List<Dog> getAllDogs() {
-
-        return dogManagementService.getAllDogs();
-    }
-
     @GetMapping("/dogs/name/{name}")
     public Dog getDogByName(@PathVariable String name) {
 
@@ -51,17 +45,21 @@ public class DogController {
         return dogManagementService.getConditionByTriple(name, ownerName, ownerPhoneNumber);
     }
 
-    @GetMapping("/dogs/{dog, newDog}")
-    @ResponseStatus(HttpStatus.OK)
-    public void replaceDogs(@PathVariable Dog dog, Dog newDog) {
-
-//        dogManagementService.replaceDogs(dog, newDog);
-//        dogManagement와 merge 할 때 함수명 확인 및 수정
-    }
-
     @GetMapping("/dogs/addMedical/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecord}")
     public void addMedicalRecord(@PathVariable String name, String ownerName, String ownerPhoneNumber, String medicalRecord) {
 
         dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecord);
+    }
+
+    @GetMapping("/dogs/changeKind/{name}/{ownerName}/{ownerPhoneNumber}/{kind}")
+    public void changeKind(@PathVariable String name, String ownerName, String ownerPhoneNumber, String kind) {
+
+        dogManagementService.updateDogkind(name, ownerName, ownerPhoneNumber, kind);
+    }
+
+    @GetMapping("/dogs/changeDog/{name}/{ownerName}/{ownerPhoneNumber}/{newName}/{newOwnerName}/{newOwnerPhoneNumber}/{newKind}")
+    public void replaceDog(@PathVariable String name, String ownerName, String ownerPhoneNumber, String newName, String newOwnerName, String newOwnerPhoneNumber, String newKind) {
+
+        dogManagementService.updateDog(name, ownerName, ownerPhoneNumber, newName, newOwnerName, newOwnerPhoneNumber, newKind);
     }
 }

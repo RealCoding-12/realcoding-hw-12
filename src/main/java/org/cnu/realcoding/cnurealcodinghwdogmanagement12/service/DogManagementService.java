@@ -59,16 +59,17 @@ public class DogManagementService {
         }
         return dog;
     }
-    public void updateDog(String name, String ownerName, String ownerPhoneNumber, String newName, String newOwnerName, String newOwnerPhoneNumber, String newKind, String newMedicalRecord) {
-        dogRepository.editInfo(name, ownerName, ownerPhoneNumber, newName, newOwnerName, newOwnerPhoneNumber, newKind, newMedicalRecord);
+    public void updateDog(String name, String ownerName, String ownerPhoneNumber, String newName, String newOwnerName, String newOwnerPhoneNumber, String newKind) {
+        Dog dog = dogRepository.findDog(name, ownerName, ownerPhoneNumber);
+
+        if(dog == null) {
+            throw new DogNotFoundException();
+        } else {
+            dogRepository.editInfo(name, ownerName, ownerPhoneNumber, newName, newOwnerName, newOwnerPhoneNumber, newKind, dog.getMedicalRecords());
+        }
     }
     public void updateDogkind(String name, String ownerName, String ownerPhoneNumber, String newkind) {
         dogRepository.editKind(name, ownerName, ownerPhoneNumber, newkind);
-    }
-
-    public List<Dog> getAllDogs() {
-
-        return dogRepository.findAllDogs();
     }
 
     public void addMedicalRecord(String name, String ownerName, String ownerPhoneNumber, String medicalRecord) {
