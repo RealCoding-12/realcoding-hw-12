@@ -67,7 +67,7 @@ public class DogRepository {
         return mongoTemplate.findAll(Dog.class);
     }
 
-    public void editInfo(String name, String ownerName, String ownerPhoneNumber) {
+    public void editInfo(String name, String ownerName, String ownerPhoneNumber, String newName, String newOwnerName, String newOwnerPhoneNumber, String newKind, String newMedicalRecord) {
         Query query = new Query();
         Criteria criteria = new Criteria();
 
@@ -81,6 +81,11 @@ public class DogRepository {
         query.addCriteria(criteria.andOperator(criteria_arr));
 
         Update update = new Update();
+        update.set("name", newName);
+        update.set("ownerName", newOwnerName);
+        update.set("ownerPhoneNumber", newOwnerPhoneNumber);
+        update.set("kind", newKind);
+        update.addToSet("medicalRecords", newMedicalRecord);
         mongoTemplate.updateMulti(query, update, Dog.class);
     }
 
@@ -98,7 +103,6 @@ public class DogRepository {
         query.addCriteria(criteria.andOperator(criteria_arr));
 
         Update update = new Update();
-        mongoTemplate.updateMulti(query, update, Dog.class);
 
         update.set("kind", newKind);
 
