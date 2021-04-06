@@ -67,42 +67,18 @@ public class DogRepository {
         return mongoTemplate.findAll(Dog.class);
     }
 
-    public void editInfo(String name, String ownerName, String ownerPhoneNumber) {
-        Query query = new Query();
-        Criteria criteria = new Criteria();
-
-        String ask_list[] = {name, ownerName, ownerPhoneNumber};
-        Criteria criteria_arr[] = new Criteria[ask_list.length];
-
-        criteria_arr[0] = Criteria.where("name").is(name);
-        criteria_arr[1] = Criteria.where("ownerName").is(ownerName);
-        criteria_arr[2] = Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber);
-
-        query.addCriteria(criteria.andOperator(criteria_arr));
-
+    public void editInfo() {
         Update update = new Update();
-        mongoTemplate.updateMulti(query, update, Dog.class);
+        mongoTemplate.updateMulti(new Query(), update, "Dog");
     }
 
-    public void editKind(String name, String ownerName, String ownerPhoneNumber, String newKind) {
+    public void editKind(String newKind) {
         Query query = new Query();
-        Criteria criteria = new Criteria();
-
-        String ask_list[] = {name, ownerName, ownerPhoneNumber};
-        Criteria criteria_arr[] = new Criteria[ask_list.length];
-
-        criteria_arr[0] = Criteria.where("name").is(name);
-        criteria_arr[1] = Criteria.where("ownerName").is(ownerName);
-        criteria_arr[2] = Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber);
-
-        query.addCriteria(criteria.andOperator(criteria_arr));
-
+        //업데이트 할 항목 정의
         Update update = new Update();
-        mongoTemplate.updateMulti(query, update, Dog.class);
-
         update.set("kind", newKind);
 
-        mongoTemplate.updateFirst(query, update, Dog.class);
+        mongoTemplate.updateFirst(query, update, "Dog");
     }
 
 }
