@@ -21,7 +21,7 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("My First Spring Boot Project")
+                .title("Real Coding HW for Dog Management")
                 .version("1.0")
                 .build();
     }
