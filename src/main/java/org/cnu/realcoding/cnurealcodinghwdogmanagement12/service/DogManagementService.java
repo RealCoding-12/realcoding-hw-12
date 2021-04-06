@@ -64,4 +64,14 @@ public class DogManagementService {
 
         return dogRepository.findAllDogs();
     }
+
+    public void addMedicalRecord(String name, String ownerName, String ownerPhoneNumber, String medicalRecord) {
+        Dog dog = dogRepository.findDog(name, ownerName, ownerPhoneNumber);
+
+        if(dog == null) {
+            throw new DogNotFoundException();
+        } else {
+            dogRepository.addMedicalRecords(name, ownerName, ownerPhoneNumber, medicalRecord);
+        }
+    }
 }
