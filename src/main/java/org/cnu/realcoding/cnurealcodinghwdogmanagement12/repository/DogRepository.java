@@ -3,6 +3,7 @@ package org.cnu.realcoding.cnurealcodinghwdogmanagement12.repository;
 import org.cnu.realcoding.cnurealcodinghwdogmanagement12.domain.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.*;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
@@ -40,6 +41,22 @@ public class DogRepository {
         }
 
         return null;
+    }
+
+    public void addMedicalRecords(String name, String ownerName, String ownerPhoneNumber, String medicalRecord) {
+        Query query = new Query();
+        Criteria criteria = new Criteria();
+
+        String ask_list[] = {name, ownerName, ownerPhoneNumber};
+        Criteria criteria_arr[] = new Criteria[ask_list.length];
+
+        criteria_arr[0] = Criteria.where("name").is(name);
+        criteria_arr[1] = Criteria.where("ownerName").is(ownerName);
+        criteria_arr[2] = Criteria.where("ownerPhoneNumber").is(ownerPhoneNumber);
+
+        query.addCriteria(criteria.andOperator(criteria_arr));
+
+        mongoTemplate.findAndModify(query, new Update().addToSet("medicalRecords", medicalRecord), Dog.class);
     }
 
     public void insertDog(Dog dog) {

@@ -58,4 +58,10 @@ public class DogController {
 //        dogManagementService.replaceDogs(dog, newDog);
 //        dogManagement와 merge 할 때 함수명 확인 및 수정
     }
+
+    @GetMapping("/dogs/addMedical/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecord}")
+    public void addMedicalRecord(@PathVariable String name, String ownerName, String ownerPhoneNumber, String medicalRecord) {
+
+        dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecord);
+    }
 }
