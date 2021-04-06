@@ -59,11 +59,11 @@ public class DogManagementService {
         }
         return dog;
     }
-    public void updateDog() {
-        dogRepository.editInfo();
+    public void updateDog(String name, String ownerName, String ownerPhoneNumber) {
+        dogRepository.editInfo(name, ownerName, ownerPhoneNumber);
     }
-    public void updateDogkind(String newkind) {
-        dogRepository.editKind(newkind);
+    public void updateDogkind(String name, String ownerName, String ownerPhoneNumber, String newkind) {
+        dogRepository.editKind(name, ownerName, ownerPhoneNumber, newkind);
     }
 
     public List<Dog> getAllDogs() {
